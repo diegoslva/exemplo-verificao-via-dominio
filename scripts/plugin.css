@@ -1,0 +1,65 @@
+.acessibilidade-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  font-family: Arial, sans-serif;
+}
+
+.acessibilidade-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.acessibilidade-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.acessibilidade-close:hover {
+  color: black;
+}
+
+.acessibilidade-options {
+  margin-top: 20px;
+}
+
+.acessibilidade-option {
+  margin-bottom: 10px;
+}
+
+.acessibilidade-option label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.acessibilidade-modal  * {
+  color: #000;
+}
+
+
+@media (prefers-contrast: more) {
+  .alto-constraste a {
+    color: yellow;
+  }
+  body.font-maior {
+    background-color: black;
+    color: white;
+  }
+}
