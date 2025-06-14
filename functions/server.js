@@ -4,7 +4,9 @@ const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
-const SCRIPTS_DIR = process.env.NETLIFY 
+// Detecta se está rodando no Netlify ou localmente
+const isNetlify = process.env.NETLIFY === 'true' || process.env.CONTEXT === 'production' || process.env.CONTEXT === 'deploy-preview';
+const SCRIPTS_DIR = isNetlify 
   ? path.join(process.cwd(), 'scripts') 
   : path.join(__dirname, '../scripts');
 
