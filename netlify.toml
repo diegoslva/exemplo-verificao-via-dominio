@@ -2,6 +2,9 @@
   functions = "functions"
   publish = "public"
 
+[functions]
+  included_files = ["scripts/**"]
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/server/api/:splat"
