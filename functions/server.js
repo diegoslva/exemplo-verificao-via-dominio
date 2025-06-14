@@ -4,6 +4,10 @@ const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
 
+const SCRIPTS_DIR = process.env.NETLIFY 
+  ? path.join(process.cwd(), 'scripts') 
+  : path.join(__dirname, '../scripts');
+
 const app = express();
 const router = express.Router();
 
@@ -28,7 +32,7 @@ router.get('/api', (req, res) => {
     return;
   }
 
-  const filePath = path.join(__dirname, '../scripts/plugin.html');
+  const filePath = path.join(SCRIPTS_DIR, 'plugin.html');
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -45,7 +49,7 @@ router.get('/api/script', (req, res) => {
   const isAllowed = checkDomain(req);
 
   if (!isAllowed) {
-    const accessDeniedPath = path.join(__dirname, '../scripts/access-denied.js');
+    const accessDeniedPath = path.join(SCRIPTS_DIR, 'access-denied.js');
     
     fs.readFile(accessDeniedPath, 'utf8', (err, data) => {
       if (err) {
@@ -56,12 +60,13 @@ router.get('/api/script', (req, res) => {
       
       res.status(200).type('application/javascript').send(data);
     });
+    return;
   }
 
 
-  const htmlPath = path.join(__dirname, '../scripts/plugin.html');
-  const cssPath = path.join(__dirname, '../scripts/plugin.css');
-  const jsPath = path.join(__dirname, '../scripts/app.js');
+  const htmlPath = path.join(SCRIPTS_DIR, 'plugin.html');
+  const cssPath = path.join(SCRIPTS_DIR, 'plugin.css');
+  const jsPath = path.join(SCRIPTS_DIR, 'app.js');
 
   try {
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
@@ -69,7 +74,7 @@ router.get('/api/script', (req, res) => {
     const jsContent = fs.readFileSync(jsPath, 'utf8');
 
 
-    const templatePath = path.join(__dirname, '../scripts/template.js');
+    const templatePath = path.join(SCRIPTS_DIR, 'template.js');
     const templateContent = fs.readFileSync(templatePath, 'utf8');
     
     const combinedScript = templateContent
@@ -94,7 +99,7 @@ router.get('/api/styles', (req, res) => {
     return;
   }
 
-  const filePath = path.join(__dirname, '../scripts/plugin.css');
+  const filePath = path.join(SCRIPTS_DIR, 'plugin.css');
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
